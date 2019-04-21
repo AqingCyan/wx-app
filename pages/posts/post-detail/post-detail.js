@@ -32,6 +32,9 @@ Page({
     }
   },
 
+  /**
+   * 收藏功能
+   */
   onColletionTap: function(event) {
     let postsCollected = wx.getStorageSync('posts_collected')
     let postCollected = postsCollected[this.data.currentPostId]
@@ -43,6 +46,9 @@ Page({
     this.showToast(postsCollected, postCollected)
   },
 
+  /*
+  * 封装了两个收藏交互，为了交互简单，我们使用toast方法
+  */
   showToast: function(postsCollected, postCollected) {
     wx.showToast({
       title: postCollected ? '收藏成功' : '取消收藏',
@@ -76,6 +82,28 @@ Page({
             collected: postCollected
           })
         }
+      }
+    })
+  },
+
+  /**
+   * 分享功能
+   */
+  onShareTap: function(event) {
+    const itemList = [
+      "分享到朋友圈",
+      "分享给朋友",
+      "分享到QQ",
+      "分享到微博"
+    ]
+    wx.showActionSheet({
+      itemList: itemList,
+      itemColor: '#405f80',
+      success: (res) => {
+        wx.showModal({
+          title: '用户分享到了' + itemList[res.tapIndex],
+          content: '现在暂时不支持分享功能'
+        })
       }
     })
   }
