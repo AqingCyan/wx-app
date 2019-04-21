@@ -27,3 +27,17 @@
 - 小程序根目录下的 `app.json` 文件用来对微信小程序进行全局配置。文件内容为一个 JSON 对象
 - 每一个小程序页面也可以使用 `.json` 文件来对本页面的窗口表现进行配置。页面中配置项在当前页面会覆盖 `app.json` 的 `window` 中相同的配置项。文件内容为一个 JSON 对象
 - 页面配置中只能设置 `app.json` 中 `window` 对应的配置项，以决定本页面的窗口表现，所以无需写 `window` 这个属性。
+
+## 生命周期
+
+- 在小程序页面加载到销毁的过程中，自动执行的函数，每个函数有自己的执行顺序和触发时机。
+- `onPullDownRefresh`、`onReachBottom`、`onShareAppMessage`并不是生命周期函数，而是特定操作触发的函数。
+
+## 事件机制
+
+- 事件是视图层到逻辑层的通讯方式。
+- 事件可以将用户的行为反馈到逻辑层进行处理。
+- 事件可以绑定在组件上，当达到触发事件，就会执行逻辑层中对应的事件处理函数。
+- 事件对象可以携带额外信息，如 id, dataset, touches。
+
+具体的事件具体见官方文档：[事件类型一览](<https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html>)
