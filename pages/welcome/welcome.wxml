@@ -3,7 +3,7 @@
 <view class='container'>
   <image class='user-avatar' src='/images/avatar/avatar.png'></image>
   <text class='user-name'>Hello, 百年百年</text>
-  <view class='moto-content'>
+  <view class='moto-content' bind:tap="onTap">
     <text class='moto'>开启小程序之旅</text>
   </view>
 </view>
