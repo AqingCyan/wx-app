@@ -13,6 +13,10 @@
     </swiper-item>
   </swiper>
   <block wx:for="{{posts_content}}" wx:for-item="item" wx:for-index="index" wx:key="item.content">
-    <template is="postItem" data="{{ item }}"/>
+    <!-- 使用template -->
+    <!-- 绑定一个自定义属性postId -->
+    <view catch:tap='onPostTap' data-postId = "{{ item.postId }}">
+      <template is="postItem" data="{{ ...item }}" />
+    </view>
   </block>
 </view>
