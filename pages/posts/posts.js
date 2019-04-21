@@ -1,5 +1,5 @@
 // pages/posts/posts.js
-const postData =require('../../data/posts-data.js')
+const postData = require('../../data/posts-data.js')
 
 Page({
 
