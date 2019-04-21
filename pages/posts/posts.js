@@ -21,7 +21,8 @@ Page({
     // 获取自定义属性postid，以操作对应数据
     let postId = event.currentTarget.dataset.postid
     wx.navigateTo({
-      url: './post-detail/post-detail',
+      // 传递postId作为页面参数
+      url: 'post-detail/post-detail?id=' + postId
     })
   }
 })
