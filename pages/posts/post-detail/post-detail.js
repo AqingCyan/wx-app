@@ -1,5 +1,6 @@
 // pages/posts/posts-detail/posts-detail.js
 const data = require('../../../data/posts-data.js')
+const app = getApp()
 
 Page({
   data: {
@@ -9,6 +10,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 获取小程序全局变量，以控制音乐播放的全局控制属性
+    let globalData = app.globaData
     // 接收传递过来的id
     let postId = options.id
     this.data.currentPostId = postId
@@ -32,6 +35,34 @@ Page({
       postsCollected[postId] = false
       wx.setStorageSync('posts_collected', postsCollected)
     }
+    // 进入页面判断是否在播放音乐以控制头图显示
+    if (globalData.g_isPlayMusic && app.globaData.g_currentMusicPostId === postId) {
+      this.setData({
+        isPlayingMusic: true
+      })
+    }
+    // 监听背景音乐播放状态
+    this.setMusicMonitor()
+  },
+
+  /**
+   * 监听音乐播放，控制头图显示
+   */
+  setMusicMonitor: function(event) {
+    wx.onBackgroundAudioPlay(() => {
+      this.setData({
+        isPlayingMusic: true
+      })
+      app.globaData.g_isPlayMusic = true
+      app.globaData.g_currentMusicPostId = this.data.currentPostId
+    })
+    wx.onBackgroundAudioPause(() => {
+      this.setData({
+        isPlayingMusic: false
+      })
+      app.globaData.g_isPlayMusic = false
+      app.globaData.g_currentMusicPostId = null
+    })
   },
 
   /**
