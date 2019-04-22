@@ -1,15 +1,15 @@
 <!-- 引用模板 -->
 <import src="post-item/post-item-template.wxml" />
 <view>
-  <swiper indicator-dots indicator-color='#fff' autoplay>
+  <swiper catchtap='onSwiperTap' indicator-dots indicator-color='#fff' autoplay>
     <swiper-item>
-      <image src='/images/wx.png'></image>
+      <image src='/images/wx.png' data-postId="3"></image>
     </swiper-item>
     <swiper-item>
-      <image src='/images/vr.png'></image>
+      <image src='/images/vr.png' data-postId="4"></image>
     </swiper-item>
     <swiper-item>
-      <image src='/images/iqiyi.png'></image>
+      <image src='/images/iqiyi.png' data-postId="5"></image>
     </swiper-item>
   </swiper>
   <block wx:for="{{posts_content}}" wx:for-item="item" wx:for-index="index" wx:key="item.content">
