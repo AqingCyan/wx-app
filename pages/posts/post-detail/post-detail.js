@@ -2,7 +2,9 @@
 const data = require('../../../data/posts-data.js')
 
 Page({
-  data: {},
+  data: {
+    isPlayingMusic: false
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -47,8 +49,8 @@ Page({
   },
 
   /*
-  * 封装了两个收藏交互，为了交互简单，我们使用toast方法
-  */
+   * 封装了两个收藏交互，为了交互简单，我们使用toast方法
+   */
   showToast: function(postsCollected, postCollected) {
     wx.showToast({
       title: postCollected ? '收藏成功' : '取消收藏',
@@ -106,5 +108,29 @@ Page({
         })
       }
     })
+  },
+
+  /**
+   * 音乐播放功能
+   */
+  onMusicTap: function(event) {
+    let currentPostId = this.data.currentPostId
+    let postsData = data.postList
+    let isPlayingMusic = this.data.isPlayingMusic
+    if (isPlayingMusic) {
+      wx.pauseBackgroundAudio()
+      this.setData({
+        isPlayingMusic: false
+      })
+    } else {
+      wx.playBackgroundAudio({
+        dataUrl: postsData[currentPostId].music.url,
+        title: postsData[currentPostId].music.title,
+        coverImgUrl: postsData[currentPostId].music.coverImg
+      })
+      this.setData({
+        isPlayingMusic: true
+      })
+    }
   }
 })
