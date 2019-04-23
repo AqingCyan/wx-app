@@ -11,7 +11,7 @@ Page({
    */
   onLoad: function(options) {
     // 获取小程序全局变量，以控制音乐播放的全局控制属性
-    let globalData = app.globaData
+    let globalData = app.globalData
     // 接收传递过来的id
     let postId = options.id
     this.data.currentPostId = postId
@@ -53,15 +53,15 @@ Page({
       this.setData({
         isPlayingMusic: true
       })
-      app.globaData.g_isPlayMusic = true
-      app.globaData.g_currentMusicPostId = this.data.currentPostId
+      app.globalData.g_isPlayMusic = true
+      app.globalData.g_currentMusicPostId = this.data.currentPostId
     })
     wx.onBackgroundAudioPause(() => {
       this.setData({
         isPlayingMusic: false
       })
-      app.globaData.g_isPlayMusic = false
-      app.globaData.g_currentMusicPostId = null
+      app.globalData.g_isPlayMusic = false
+      app.globalData.g_currentMusicPostId = null
     })
   },
 
