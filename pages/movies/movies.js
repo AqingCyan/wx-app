@@ -12,15 +12,15 @@ Page({
     let inTheatersUrl = `${doubanBase}/v2/movie/in_theaters?start=0&count=3`
     let comingSoonUrl = `${doubanBase}/v2/movie/coming_soon?start=0&count=3`
     let top250Url = `${doubanBase}/v2/movie/top250?start=0&count=3`
-    this.getMovieListData(inTheatersUrl, "inTheaters")
-    this.getMovieListData(comingSoonUrl, "comingSoon")
-    this.getMovieListData(top250Url, "top250")
+    this.getMovieListData(inTheatersUrl, "inTheaters", "正在热映")
+    this.getMovieListData(comingSoonUrl, "comingSoon", "即将上映")
+    this.getMovieListData(top250Url, "top250", "豆瓣Top250")
   },
 
   /**
    * 获取电影列表
    */
-  getMovieListData: function (url, settedKey) {
+  getMovieListData: function (url, settedKey, catetoryTitle) {
     wx.request({
       url: url,
       method: 'GET',
@@ -28,7 +28,7 @@ Page({
         'Content-Tyep': 'json'
       },
       success: (res) => {
-        this.processDoubanData(res.data, settedKey)
+        this.processDoubanData(res.data, settedKey, catetoryTitle)
       },
       fail: (error) => {
         console.log(error)
@@ -39,7 +39,7 @@ Page({
   /**
    * 处理电影数据
    */
-  processDoubanData: function (moviesDouban, settedKey) {
+  processDoubanData: function (moviesDouban, settedKey, catetoryTitle) {
     let movies = []
     for (let idx in moviesDouban.subjects) {
       let subject = moviesDouban.subjects[idx]
@@ -58,6 +58,7 @@ Page({
     }
     let readData = {}
     readData[settedKey] = {
+      catetoryTitle,
       movies
     }
     this.setData(readData)

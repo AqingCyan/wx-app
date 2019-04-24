@@ -8,7 +8,6 @@ function convertToStarsArray(stars) {
       array.push(0)
     }
   }
-  console.log(array)
   return array
 }
 
