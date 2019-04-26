@@ -18,9 +18,19 @@ Page({
   },
 
   /**
+   * 更多电影
+   */
+  onMoreTap: function(event) {
+    let category = event.currentTarget.dataset.category
+    wx.navigateTo({
+      url: 'more-movie/more-movie?category=' + category
+    })
+  },
+
+  /**
    * 获取电影列表
    */
-  getMovieListData: function (url, settedKey, catetoryTitle) {
+  getMovieListData: function (url, settedKey, categoryTitle) {
     wx.request({
       url: url,
       method: 'GET',
@@ -28,7 +38,7 @@ Page({
         'Content-Tyep': 'json'
       },
       success: (res) => {
-        this.processDoubanData(res.data, settedKey, catetoryTitle)
+        this.processDoubanData(res.data, settedKey, categoryTitle)
       },
       fail: (error) => {
         console.log(error)
@@ -39,7 +49,7 @@ Page({
   /**
    * 处理电影数据
    */
-  processDoubanData: function (moviesDouban, settedKey, catetoryTitle) {
+  processDoubanData: function (moviesDouban, settedKey, categoryTitle) {
     let movies = []
     for (let idx in moviesDouban.subjects) {
       let subject = moviesDouban.subjects[idx]
@@ -58,7 +68,7 @@ Page({
     }
     let readData = {}
     readData[settedKey] = {
-      catetoryTitle,
+      categoryTitle,
       movies
     }
     this.setData(readData)
